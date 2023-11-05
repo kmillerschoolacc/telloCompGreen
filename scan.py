@@ -29,9 +29,12 @@ def scanning():
                 tag_center_x = (corners[i][0][0][0] + corners[i][0][2][0]) / 2
                 frame_center_x = frame.shape[1] / 2
                 tolerance = 50
-                
+
+                distance = m.get_distance_tof() - 381
+                if (distance > 381):
+                    break
+
                 if((tag_center_x - frame_center_x) < 50):
-                    distance = m.get_distance_tof() - 381
                     
                     #add in color to this dict later
                     thisB = dict(id = ids[i], dist = distance)
