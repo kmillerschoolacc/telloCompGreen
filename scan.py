@@ -58,3 +58,4 @@ move.join()
 scan.join()
      
 print("Both threads have finished.")
+print(bList)
