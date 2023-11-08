@@ -17,45 +17,31 @@ m.takeoff()
 
 bList = []
 
-def scanning():
-    time.sleep(5)  # Simulate a task that takes 5 seconds
-    while True:
-        m.send_keepalive()
-        frame = m.get_frame_read().frame
-        corners, ids, rejected = detector.detectMarkers(frame)
+total_distance = 0
 
-        if ids is not None:
-            for i in range(len(ids)):
-                tag_center_x = (corners[i][0][0][0] + corners[i][0][2][0]) / 2
-                frame_center_x = frame.shape[1] / 2
-                tolerance = 50
+m.move_back(381)
+m.turn_left
 
-                distance = m.get_distance_tof() - 381
-                if (distance > 381):
-                    break
+while total_distance < 762:
+    m.send_keepalive()
+    frame = m.get_frame_read().frame
+    corners, ids, rejected = detector.detectMarkers(frame)
 
-                if((tag_center_x - frame_center_x) < 50):
-                    
-                    #add in color to this dict later
-                    thisB = dict(id = ids[i], dist = distance)
+    m.move_left(30.5)
+    total_distance += 30.5
 
-                    bList.append(thisB)
+    if ids is not None:
+        for i in range(len(ids)):
+            tag_center_x = (corners[i][0][0][0] + corners[i][0][2][0]) / 2
+            frame_center_x = frame.shape[1] / 2
+            tolerance = 50
+
+
+            if((tag_center_x - frame_center_x) < tolerance):
+                thisB = dict(id = ids[i], x = total_distance)
+                bList.append(thisB)
+print(thisB)
     
 
-def moving():
-    m.move_left(381)
-
-# Create two threads
-move = threading.Thread(target=moving)
-scan = threading.Thread(target=scanning)
-
-# Start both threads at the same time
-move.start()
-scan.start()
-
-# Wait for both threads to finish   
-move.join()
-scan.join()
-     
-print("Both threads have finished.")
-print(bList)
+    
+    
