@@ -26,8 +26,15 @@ while total_distance < 762:
     m.send_keepalive()
     frame = m.get_frame_read().frame
     corners, ids, rejected = detector.detectMarkers(frame)
-    cv2.imshow('Frame', frame)
-
+    tolerance = 200
+    cv2.imshow("frame", frame)
+    cv2.aruco.drawDetectedMarkers(frame, corners, ids)
+    frame_center_x = frame.shape[1] / 2
+    lower_threshold = int(frame_center_x - tolerance)
+    upper_threshold = int(frame_center_x + tolerance)
+    cv2.line(frame, (lower_threshold, 0), (lower_threshold, frame.shape[0]), (0, 0, 255), 2)
+    cv2.line(frame, (upper_threshold, 0), (upper_threshold, frame.shape[0]), (0, 0, 255), 2)
+    
     m.move_right(31)
     total_distance += 30
 
@@ -37,14 +44,12 @@ while total_distance < 762:
             tag_center_x = (corners[i][0][0][0] + corners[i][0][2][0]) / 2
             frame_center_x = frame.shape[1] / 2
             tolerance = 200
-
-
-            if((tag_center_x - frame_center_x) < tolerance):
+            if((abs(tag_center_x - frame_center_x)) < tolerance):
                 thisB = dict(id = ids[i], x = total_distance)
+                print("tag centered")
                 bList.append(thisB)
+            if(abs((tag_center_x - frame_center_x)) > tolerance):
+                print("tag not centered")
 print(bList)
 m.streamoff()
 m.land()
-
-    
-    
