@@ -21,14 +21,14 @@ def getColor(raw_frame):
 		def p(self):
 			print(self.name, self.low, self.high)
 
-	red = color("red", (161, 0, 43), (255, 72, 113))
+	red = color("red", (50, 0, 0), (255, 20, 78))
 	pink = color("pink", (182, 121, 157), (212, 173, 211))
 	orange = color("orange", (182, 55, 0), (255, 147, 62))
 	yellow = color("yellow", (169, 87, 0), (236, 255, 15))
-	dark_green = color("dark_green", (17, 117, 0), (43, 169, 69))
+	dark_green = color("dark_green", (0, 50, 0), (45, 176, 72))
 	light_green = color("light_green", (88, 174, 74), (116, 255, 170))
 	purple = color("purple", (102, 78, 150), (186, 122, 203))
-	dark_blue =  color("dark_blue", (14, 74, 117), (59, 115, 171))
+	dark_blue =  color("dark_blue", (0, 11, 53), (23, 84, 255))
 	light_blue = color("light_blue", (67, 132, 129), (99, 153, 175))
 
 	colors = [red, pink, orange, yellow, dark_green, light_green, purple, dark_blue, light_blue]
