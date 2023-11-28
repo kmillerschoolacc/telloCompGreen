@@ -134,7 +134,7 @@ while total_distance < 762:
             tag_center_x = (corners[i][0][0][0] + corners[i][0][2][0]) / 2
             frame_center_x = frame.shape[1] / 2
             if((abs(tag_center_x - frame_center_x)) < tolerance):
-                thisB = dict(id = ids[i], x = camDistance*100/30.48, y = (total_distance-381)/30.48, color = color)
+                thisB = dict(id = ids[i], x = -1*camDistance*100/30.48, y = (total_distance-381)/30.48, color = color)
                 if not any(d['id'] == thisB['id'] for d in bList):
                     bList.append(thisB)
                     print(thisB)
