@@ -83,13 +83,12 @@ m.streamon()
 m.takeoff()
 
 cameraMatrix = [
-	(913.0063458,    0,         476.15708423),
-	(0.,        , 913.98515903, 362.30583839),
-	(0.,        , 0.          , 1.        )
+    (1.19047150e+03, 0.00000000e+00, 1.87149339e+02),
+    (0.00000000e+00, 1.19046273e+03, 2.64741303e+02),
+    (0.00000000e+00, 0.00000000e+00, 1.00000000e+00)
 ]
-
 cameraMatrix = np.array(cameraMatrix)
-dist = np.array([-8.47171386e-04, -2.79206553e-01, -2.49784518e-03,  2.67978335e-03, 1.08936104e+00])
+dist = np.array([-0.03765726, 0.57115696, 0.01464739, -0.01555104, -2.51111791])
 
 marker_length = 0.0762
 
@@ -104,6 +103,7 @@ m.rotate_counter_clockwise(90)
 while total_distance < 762:
     m.send_keepalive()
     frame = m.get_frame_read().frame
+    color = getColor(frame)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     corners, ids, rejected = detector.detectMarkers(frame)
 
@@ -133,7 +133,7 @@ while total_distance < 762:
             tag_center_x = (corners[i][0][0][0] + corners[i][0][2][0]) / 2
             frame_center_x = frame.shape[1] / 2
             if((abs(tag_center_x - frame_center_x)) < tolerance):
-                thisB = dict(id = ids[i], x = camDistance*100/30.48, y = (total_distance-381)/30.48, color = getColor(frame))
+                thisB = dict(id = ids[i], x = camDistance*100/30.48, y = (total_distance-381)/30.48, color = color)
                 if not any(d['id'] == thisB['id'] for d in bList):
                     bList.append(thisB)
                     print(thisB)
@@ -147,6 +147,7 @@ total_distance = 0
 while total_distance < 762:
     m.send_keepalive()
     frame = m.get_frame_read().frame
+    color = getColor(frame)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     corners, ids, rejected = detector.detectMarkers(frame)
 
@@ -176,7 +177,7 @@ while total_distance < 762:
             tag_center_x = (corners[i][0][0][0] + corners[i][0][2][0]) / 2
             frame_center_x = frame.shape[1] / 2
             if((abs(tag_center_x - frame_center_x)) < tolerance):
-                thisB = dict(id = ids[i], x = camDistance*100/30.48, y = (total_distance-381)/30.48, color = getColor(frame))
+                thisB = dict(id = ids[i], x = camDistance*100/30.48, y = (total_distance-381)/30.48, color = color)
                 if not any(d['id'] == thisB['id'] for d in bList):
                     bList.append(thisB)
                 print("tag centered")
