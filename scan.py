@@ -10,8 +10,6 @@ idInp = int(input("id: "))
 colorInp = str(input("color: "))
 
 def getColor(raw_frame):
-	rbgFrame = cv2.cvtColor(raw_frame, cv2.COLOR_BGR2RGB)
-
 	class color:
 		def __init__(self, name, low, high):
 			self.name = name
@@ -20,6 +18,7 @@ def getColor(raw_frame):
 
 		def p(self):
 			print(self.name, self.low, self.high)
+
 
 	red = color("red", (50, 0, 0), (255, 20, 78))
 	pink = color("pink", (182, 121, 157), (212, 173, 211))
@@ -53,7 +52,7 @@ def getColor(raw_frame):
 	right = (int)(frame_center_x+tolerance)
 	
 	#frame = cv2.bitwise_and(raw_frame, raw_frame, mask=blueMask)
-	for x in range(100):
+	for x in range(200):
 		randomX = random.randint(left,right)
 		randomY = random.randint(0,539)
 		for i in range(len(colors)):
@@ -63,10 +62,11 @@ def getColor(raw_frame):
 		colorFrame = cv2.line(colorFrame, (left,539), (left,0), (255, 255, 255), 2)
 		colorFrame = cv2.line(colorFrame, (right,539), (right,0), (255, 255, 255), 2)
 		cv2.imshow("color", colorFrame)
-    
-	maxColor = (colors[colorValues.index(max(colorValues))].name)
+		
+	maxColor = colors[colorValues.index(max(colorValues))].name
+
 	colorValues = [0] * 9
-      
+	
 	return(maxColor)
 
 
