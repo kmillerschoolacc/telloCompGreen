@@ -104,6 +104,7 @@ while total_distance < 762:
     m.send_keepalive()
     frame = m.get_frame_read().frame
     color = getColor(frame)
+	print(color)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     corners, ids, rejected = detector.detectMarkers(frame)
 
