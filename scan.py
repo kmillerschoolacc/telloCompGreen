@@ -1,10 +1,14 @@
-import threading
+from collections import deque
+from imutils.video import VideoStream
+import numpy as np
+import cv2
+import imutils
+import time
+from djitellopy import tello
 import time
 import cv2
-import numpy as np
-from djitellopy import tello
-import imutils
 import random
+import math
 
 idInp = int(input("id: "))
 colorInp = str(input("color: "))
