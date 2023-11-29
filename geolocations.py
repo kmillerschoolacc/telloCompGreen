@@ -1,10 +1,15 @@
 import os
+from djitellopy import tello
+
+m = tello.Tello()
+m.connect()
+m.takeoff()
 
 blist = []
 
 # Generate blist with specified criteria
 for id_val in range(23):
-    color_list = ["red", "orange", "yellow", "light green", "green", "light blue", "blue", "purple", "pink"]
+    color_list = ["red", "orange", "yellow", "lighter green", "darker green", "lighter blue", "darker blue", "purple", "pink"]
     x_values = list(range(-25, 25, 1))
     y_values = list(range(-25, 25, 1))
 
@@ -19,9 +24,11 @@ for id_val in range(23):
                 )
                 blist.append(thisb)
 
-output_file_path = os.path.abspath('/Users/knguyen/Documents/Tello/Tello_competitoin/output.txt')
+output_file_path = os.path.abspath('/Users/ophelps/Desktop/dcc/output.txt')
 
 # Write blist to a text file
 with open(output_file_path, 'w') as file:
     for item in blist:
         file.write(str(item) + '\n')
+
+m.land()
