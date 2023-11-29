@@ -7,7 +7,7 @@ m.takeoff()
 
 blist = []
 
-# Generate blist with specified criteria
+# Generates blist with specified criteria
 for id_val in range(23):
     color_list = ["red", "orange", "yellow", "lighter green", "darker green", "lighter blue", "darker blue", "purple", "pink"]
     x_values = list(range(-25, 25, 1))
@@ -24,9 +24,10 @@ for id_val in range(23):
                 )
                 blist.append(thisb)
 
+# Specify your own path:
 output_file_path = os.path.abspath('/Users/ophelps/Desktop/dcc/output.txt')
 
-# Write blist to a text file
+# Writes blist to a text file
 with open(output_file_path, 'w') as file:
     for item in blist:
         file.write(str(item) + '\n')
